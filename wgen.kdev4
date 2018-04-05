@@ -1,0 +1,4 @@
+[Project]
+Name=wgen
+Manager=KDevCMakeManager
+VersionControl=kdevgit
