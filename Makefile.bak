@@ -1,0 +1,21 @@
+CC = g++
+LD = g++
+C_FLAGS = 
+L_FLAGS = 
+LINK = -lGLEW -lSDL2 -lGL
+
+TARGET = wgen.x
+
+SRCDIR = src
+OBJDIR = build
+BINDIR = bin
+
+SOURCES := $(shell find $(SRCDIR) -name "*.cpp")
+
+$(OBJDIR)/%.o: %.c
+	$(CC) $(C_FLAGS) -c -o $@ $<
+
+depend:
+	makedepend -- $(C_FLAGS) -- $(SRCS)
+	
+# DO NOT DELETE
