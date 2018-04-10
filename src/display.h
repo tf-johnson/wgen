@@ -1,3 +1,6 @@
+#ifndef DISPLAY_H
+#define DISPLAY_H
+
 #include <iostream>
 
 #include <SDL2/SDL.h>
@@ -21,5 +24,7 @@ public:
 private:
   SDL_Window* window;
   SDL_GLContext context;
-  float color[4] = {0,0,0,0};
+  float color[4];
 };
+
+#endif

@@ -26,12 +26,17 @@ Display::Display(const std::string& title, int width, int height)
 	std::cerr << "\e[31m" << "Error: Could not give window a GL Context." << "\e[0m" << std::endl;
 	std::cout << "\e[31m" << "Aborting program - Failed to give window a gl context." << "\e[0m" << std::endl;
       } else {
+	glewExperimental = GL_TRUE; 
 	GLenum glewRes = glewInit();
 	if(glewRes != GLEW_OK) {
 	  std::cerr << "\e[31m" << "Error: Could not initialize GLEW." << "\e[0m" << std::endl;
 	  std::cout << "\e[31m" << "Aborting program - Failed to initialize GLEW." << "\e[0m" << std::endl;
 	} else {
 	  std::cout  << "\e[32m" << "Display '" << title << "' created." << "\e[0m" << std::endl;
+	  color[0] = 0;
+	  color[1] = 0;
+	  color[2] = 0;
+	  color[3] = 0;
 	  Clear();
 	}
       }
@@ -48,19 +53,18 @@ Display::~Display()
 
 void Display::Clear(float r, float g, float b, float a)
 {
-  float col[4] = {r, g, b, a};
-  Clear(col);
+  glClearColor(r, g, b, a);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Display::Clear(float* rgba)
 {
-  glClearColor(rgba[0], rgba[1], rgba[2], rgba[3]);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  Clear(rgba[0], rgba[1], rgba[2], rgba[3]);
 }
 
 void Display::Clear()
 {
-  Clear(&color[0]);
+  Clear(color[0], color[1], color[2], color[3]);
 }
 
 float* Display::getColor()
